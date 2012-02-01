@@ -25,6 +25,7 @@ MyApp::Application.routes.draw do
   acceptance_helper_routes #=> for the :acceptance env, or
   acceptance_helper_routes_for :cucumber #=> for the :cucumber env
 end
+```
 
 The two additional routes are only added in that environment.
 
@@ -52,3 +53,4 @@ If you're using ActiveResource, a good source of the URL is `ActiveResource::Bas
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
