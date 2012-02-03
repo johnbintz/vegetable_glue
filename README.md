@@ -42,7 +42,7 @@ VegetableGlue.path = '../path/to/the/app'
 
 The app will clean its database on each scenario. To restart the app, pass in the environment variable `GLUE_RESTART`:
 
-    GLUE_RESTART=true bundle exec cucumber
+    REGLUE=true bundle exec cucumber
 
 If you're using ActiveResource, a good source of the URL is `ActiveResource::Base.site`.
 

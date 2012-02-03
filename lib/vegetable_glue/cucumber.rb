@@ -1,11 +1,10 @@
 Before do
-  if ENV['GLUE_RESTART']
+  if ENV['REGLUE']
     VegetableGlue.shutdown
 
-    ENV.delete('GLUE_RESTART')
+    ENV.delete('REGLUE')
   end
 
   VegetableGlue.clean
 end
-
 
