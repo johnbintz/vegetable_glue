@@ -40,7 +40,7 @@ VegetableGlue.url = 'http://localhost:6161/' #=> include the port in here, too, 
 VegetableGlue.path = '../path/to/the/app'
 ```
 
-The app will clean its database on each scenario. To restart the app, pass in the environment variable `GLUE_RESTART`:
+The app will clean its database on each scenario. To restart the app, pass in the environment variable `REGLUE`:
 
     REGLUE=true bundle exec cucumber
 
