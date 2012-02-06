@@ -13,7 +13,6 @@ class ActionDispatch::Routing::Mapper
         params = Hash[URI.decode_www_form(env['QUERY_STRING'])]
 
         DatabaseCleaner.clean_with :truncation
-        DatabaseCleaner.clean_with :deletion
 
         if params[:scenario]
           Rails.logger.info "Cleaning database for #{params[:scenario]}"
