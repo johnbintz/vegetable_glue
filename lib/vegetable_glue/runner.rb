@@ -74,7 +74,7 @@ module VegetableGlue
       while times > 0
         begin
           Net::HTTP.get(options[:url])
-        rescue Errno::ECONNREFUSED, Errno::ECONNRESET
+        rescue Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EPIPE
           return true
         end
 
@@ -93,7 +93,7 @@ module VegetableGlue
       while times > 0
         begin
           result = get_acceptance
-        rescue Errno::ECONNREFUSED, Errno::ECONNRESET
+        rescue Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EPIPE
         end
 
         break if result
