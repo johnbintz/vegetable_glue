@@ -12,6 +12,10 @@ class ActionDispatch::Routing::Mapper
 
         DatabaseCleaner.clean_with :truncation
 
+        if scenario_name = URI.decode_www_form(env['QUERY_STRING']).first
+          Rails.logger.info "Cleaning database for #{scenario_name.last}"
+        end
+
         [ 200, {}, [ VegetableGlue::CLEAN ] ]
       }
     end

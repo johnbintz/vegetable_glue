@@ -10,9 +10,11 @@ module VegetableGlue
       port = options[:url].port
 
       result = nil
+      was_running = false
 
       begin
         result = get_acceptance
+        was_running = true
       rescue Errno::ECONNREFUSED => e
         $stdout.puts "Starting #{app_name}..."
 
@@ -24,7 +26,7 @@ module VegetableGlue
       end
 
       if result == VegetableGlue::ACCEPTANCE
-        $stdout.puts "#{app_name} running on port #{port}"
+        $stdout.puts "#{app_name} running on port #{port}" if !was_running
       else
         raise StandardError.new("Is #{app_name} running? You should have included the routes with `acceptance_helper_routes`")
       end
@@ -42,10 +44,13 @@ module VegetableGlue
       FileUtils.rm_f pid_path
     end
 
-    def clean
+    def clean(name = nil)
       ensure_running
 
-      result = Net::HTTP.get(options[:url].merge(URI("/#{VegetableGlue::CLEAN}")))
+      uri = options[:url].merge(URI("/#{VegetableGlue::CLEAN}"))
+      uri.query = URI.encode_www_form(:scenario => name) if name
+
+      result = Net::HTTP.get(uri)
 
       raise StandardError.new("#{app_name} database not cleaned") if result != VegetableGlue::CLEAN
     end

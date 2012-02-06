@@ -15,8 +15,8 @@ module VegetableGlue
       Runner.new(options).shutdown
     end
 
-    def clean
-      Runner.new(options).clean
+    def clean(name = nil)
+      Runner.new(options).clean(name)
     end
 
     def env
@@ -29,5 +29,4 @@ module VegetableGlue
     end
   end
 end
-
 
