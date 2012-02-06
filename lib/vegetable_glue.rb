@@ -9,7 +9,7 @@ module VegetableGlue
   CLEAN = '__clean__'
 
   class << self
-    attr_accessor :url, :path, :env
+    attr_accessor :url, :path, :env, :cleaning_style
 
     def shutdown
       Runner.new(options).shutdown

@@ -5,6 +5,8 @@ Before do |scenario|
     ENV.delete('REGLUE')
   end
 
-  VegetableGlue.clean(scenario.to_sexp[3])
+  @scenario = scenario
+
+  VegetableGlue.clean(@scenario.to_sexp[3])
 end
 

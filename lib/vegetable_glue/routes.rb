@@ -10,10 +10,13 @@ class ActionDispatch::Routing::Mapper
       get VegetableGlue::CLEAN => lambda { |env|
         require 'database_cleaner'
 
-        DatabaseCleaner.clean_with :truncation
+        params = Hash[URI.decode_www_form(env['QUERY_STRING'])]
 
-        if scenario_name = URI.decode_www_form(env['QUERY_STRING']).first
-          Rails.logger.info "Cleaning database for #{scenario_name.last}"
+        DatabaseCleaner.clean_with :truncation
+        DatabaseCleaner.clean_with :deletion
+
+        if params[:scenario]
+          Rails.logger.info "Cleaning database for #{params[:scenario]}"
         end
 
         [ 200, {}, [ VegetableGlue::CLEAN ] ]
