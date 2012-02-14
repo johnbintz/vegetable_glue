@@ -35,6 +35,12 @@ In the consumer (Frontend):
 
 ``` ruby
 require 'vegetable_glue/cucumber'
+```
+
+* Then add this to the `config/environments/<environment>.rb` file that Cucumbers runs under:
+
+``` ruby
+require 'vegetable_glue'
 
 VegetableGlue.url = 'http://localhost:6161/' #=> include the port in here, too, that's where the app will run
 VegetableGlue.path = '../path/to/the/app'
@@ -43,6 +49,8 @@ VegetableGlue.path = '../path/to/the/app'
 The app will clean its database on each scenario. To restart the app, pass in the environment variable `REGLUE`:
 
     REGLUE=true bundle exec cucumber
+
+Or, use one of the Rake tasks: `vegetable:unglue` to shut down and `vegetable:reglue` to shutdown, then clean.
 
 If you're using ActiveResource, a good source of the URL is `ActiveResource::Base.site`.
 

@@ -28,5 +28,24 @@ module VegetableGlue
       { :url => url, :path => path, :env => env }
     end
   end
+
+  if defined?(::Rails) && defined?(::Rails::Railtie)
+    class Railtie < ::Rails::Railtie
+      rake_tasks do
+        self.class.send(:include, Rake::DSL)
+
+        desc "Stop the dependent application"
+        task "vegetable:unglue" => :environment do
+          VegetableGlue.shutdown
+        end
+
+        desc "Restart the dependent application"
+        task "vegetable:reglue" => :environment do
+          VegetableGlue.shutdown
+          VegetableGlue.clean
+        end
+      end
+    end
+  end
 end
 
